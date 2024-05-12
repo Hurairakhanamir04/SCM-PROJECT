@@ -248,3 +248,25 @@ public:
         }
     }
 };
+class FeedbackSurvey {
+private:
+    map<string, int> eventFeedbacks; // Event name -> rating
+
+public:
+    void addFeedback(const string& eventName, int rating) {
+        eventFeedbacks[eventName] = rating;
+    }
+
+    void displayAllFeedbacks() const {
+        if (eventFeedbacks.empty()) {
+            cout << "No feedback available yet." << endl;
+            return;
+        }
+
+        cout << "Feedbacks:" << endl;
+        for (const auto& feedback : eventFeedbacks) {
+            cout << "Event: " << feedback.first << ", Rating: " << feedback.second << endl;
+        }
+    }
+};
+
