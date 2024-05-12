@@ -104,3 +104,27 @@ public:
         cout << "User added successfully!" << endl;
     }
 };
+class OnlineTicketingSystem {
+private:
+    vector<Ticket> tickets;
+
+public:
+    void generateTicket(string name, string date, string location, string type, int qty, double price) {
+        Ticket newTicket(name, date, location, type, qty, price);
+        tickets.push_back(newTicket);
+        cout << "Ticket generated successfully!" << endl;
+    }
+
+    void displayAllTickets() const {
+        if (tickets.empty()) {
+            cout << "No tickets generated yet." << endl;
+            return;
+        }
+
+        cout << "Generated Tickets:" << endl;
+        for (const Ticket& ticket : tickets) {
+            ticket.displayTicketDetails();
+            cout << endl;
+        }
+    }
+};
