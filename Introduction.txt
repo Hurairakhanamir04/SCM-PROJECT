@@ -339,3 +339,289 @@ public:
         cout << "3. Instagram: Event photos and stories" << endl;
     }
 };
+int main() {
+    UserAuthenticator authenticator;
+    OnlineTicketingSystem ticketingSystem;
+    EventScheduler eventScheduler;
+    VenueManager venueManager;
+    SpeakerManager speakerManager;
+    FeedbackSurvey feedbackSurvey;
+    Networking networking;
+    Customization customization;
+    SocialMediaIntegration socialMedia;
+
+    int choice;
+    string username, password, role;
+
+    do {
+        cout << "\nChoose an option:" << endl;
+        cout << "1. Add user" << endl;
+        cout << "2. Login" << endl;
+        cout << "3. Create Event" << endl;
+        cout << "4. Display Events" << endl;
+        cout << "5. Generate Ticket" << endl;
+        cout << "6. Display All Tickets" << endl;
+        cout << "7. Schedule Event" << endl;
+        cout << "8. Display Scheduled Events" << endl;
+        cout << "9. Add Venue" << endl;
+        cout << "10. Display All Venues" << endl;
+        cout << "11. Add Speaker" << endl;
+        cout << "12. Display All Speakers" << endl;
+        cout << "13. Add Feedback" << endl;
+        cout << "14. Display All Feedbacks" << endl;
+        cout << "15. Make Payment" << endl;
+        cout << "16. Add Attendee" << endl;
+        cout << "17. Connect Attendees" << endl;
+        cout << "18. Display Attendee Connections" << endl;
+        cout << "19. Display All Attendees" << endl;
+        cout << "20. Customize Event Page" << endl;
+        cout << "21. Share Event Details on Social Media" << endl;
+        cout << "22. Display Social Media Feed" << endl;
+        cout << "23. Exit" << endl;
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch(choice) {
+            case 1:
+                cout << "Enter username: ";
+                cin >> username;
+                cout << "Enter password: ";
+                cin >> password;
+                cout << "Enter role (admin/user): ";
+                cin >> role;
+                authenticator.addUser(username, password, role);
+                break;
+
+            case 2:
+                cout << "Enter username: ";
+                cin >> username;
+                cout << "Enter password: ";
+                cin >> password;
+                if (authenticator.authenticateUser(username, password)) {
+                    string userRole = authenticator.authorizeUser(username);
+                    if (!userRole.empty()) {
+                        cout << "User role: " << userRole << endl;
+                    } else {
+                        cout << "Failed to authorize user." << endl;
+                    }
+                }
+                break;
+
+            case 3: {
+                string userRole = authenticator.authorizeUser(username);
+                if (userRole == "admin") {
+                    string name, date, location;
+                    cout << "Enter event name: ";
+                    cin.ignore(); // Clear the input buffer
+                    getline(cin, name);
+                    cout << "Enter event date: ";
+                    getline(cin, date);
+                    cout << "Enter event location: ";
+                    getline(cin, location);
+                    eventScheduler.scheduleEvent(Event(name, date, location));
+                    cout << "Event created successfully!\n";
+                } else {
+                    cout << "You are not authorized to create events.\n";
+                }
+                break;
+            }
+
+            case 4: {
+                eventScheduler.displayScheduledEvents();
+                break;
+            }
+
+            case 5: {
+                string name, date, location, type;
+                int qty;
+                double price;
+                cout << "Enter event name: ";
+                cin.ignore(); // Clear the input buffer
+                getline(cin, name);
+                cout << "Enter event date: ";
+                getline(cin, date);
+                cout << "Enter event location: ";
+                getline(cin, location);
+                cout << "Enter ticket type: ";
+                getline(cin, type);
+                cout << "Enter quantity: ";
+                cin >> qty;
+                cout << "Enter price per ticket: $";
+                cin >> price;
+                ticketingSystem.generateTicket(name, date, location, type, qty, price);
+                break;
+            }
+
+            case 6:
+                ticketingSystem.displayAllTickets();
+                break;
+
+            case 7: {
+                string name, date, location;
+                cout << "Enter event name: ";
+                cin.ignore(); // Clear the input buffer
+                getline(cin, name);
+                cout << "Enter event date: ";
+                getline(cin, date);
+                cout << "Enter event location: ";
+                getline(cin, location);
+                eventScheduler.scheduleEvent(Event(name, date, location));
+                break;
+            }
+
+            case 8:
+                eventScheduler.displayScheduledEvents();
+                break;
+
+            case 9: {
+                string name, location, facilities;
+                cout << "Enter venue name: ";
+                cin.ignore(); // Clear the input buffer
+                getline(cin, name);
+                cout << "Enter location: ";
+                getline(cin, location);
+                cout << "Enter facilities: ";
+                getline(cin, facilities);
+                venueManager.addVenue(name, location, facilities);
+                break;
+            }
+
+            case 10:
+                venueManager.displayAllVenues();
+                break;
+
+            case 11: {
+                string name, topic;
+                cout << "Enter speaker name: ";
+                cin.ignore(); // Clear the input buffer
+                getline(cin, name);
+                cout << "Enter topic: ";
+                getline(cin, topic);
+                speakerManager.addSpeaker(name, topic);
+                break;
+            }
+
+            case 12:
+                speakerManager.displayAllSpeakers();
+                break;
+
+            case 13: {
+                string eventName;
+                int rating;
+                cout << "Enter event name: ";
+                cin.ignore(); // Clear the input buffer
+                getline(cin, eventName);
+                cout << "Rate the event (1-10): ";
+                cin >> rating;
+                if (rating < 1 || rating > 10) {
+                    cout << "Invalid rating. Rating should be between 1 and 10." << endl;
+                } else {
+                    feedbackSurvey.addFeedback(eventName, rating);
+                    cout << "Feedback added successfully!" << endl;
+                }
+                break;
+            }
+
+            case 14:
+                feedbackSurvey.displayAllFeedbacks();
+                break;
+
+            case 15: {
+                string cardNumber, cardHolderName, expiryDate, cvv;
+                double amount;
+                cout << "Enter card number: ";
+                cin >> cardNumber;
+                cout << "Enter card holder name: ";
+                cin.ignore();
+                getline(cin, cardHolderName);
+                cout << "Enter expiry date (MM/YY): ";
+                cin >> expiryDate;
+                cout << "Enter CVV: ";
+                cin >> cvv;
+                cout << "Enter payment amount: $";
+                cin >> amount;
+
+                Payment payment(cardNumber, cardHolderName, expiryDate, cvv);
+                if (payment.processPayment(amount)) {
+                    cout << "Payment successful!" << endl;
+                } else {
+                    cout << "Payment failed. Please try again." << endl;
+                }
+                break;
+            }
+
+            case 16: {
+                string name;
+                cout << "Enter attendee username: ";
+                cin >> username;
+                cout << "Enter attendee name: ";
+                cin.ignore();
+                getline(cin, name);
+                networking.addAttendee(username, name);
+                break;
+            }
+
+            case 17: {
+                string username1, username2;
+                cout << "Enter first attendee username: ";
+                cin >> username1;
+                cout << "Enter second attendee username: ";
+                cin >> username2;
+                networking.connectAttendees(username1, username2);
+                break;
+            }
+
+            case 18: {
+                cout << "Enter attendee username: ";
+                cin >> username;
+                networking.displayAttendeeConnections(username);
+                break;
+            }
+
+            case 19:
+                networking.displayAllAttendees();
+                break;
+
+            case 20: {
+                string elements, logo, theme;
+                cout << "Enter branding elements: ";
+                cin.ignore(); // Clear the input buffer
+                getline(cin, elements);
+                cout << "Enter logo path: ";
+                getline(cin, logo);
+                cout << "Enter custom theme: ";
+                getline(cin, theme);
+                customization = Customization(elements, logo, theme);
+                cout << "Customization options set successfully!" << endl;
+                break;
+            }
+
+            case 21: {
+                string eventName, eventDate, eventLocation;
+                cout << "Enter event name: ";
+                cin.ignore(); // Clear the input buffer
+                getline(cin, eventName);
+                cout << "Enter event date: ";
+                getline(cin, eventDate);
+                cout << "Enter event location: ";
+                getline(cin, eventLocation);
+                socialMedia.shareEventDetails(eventName, eventDate, eventLocation);
+                break;
+            }
+
+            case 22:
+                socialMedia.displaySocialMediaFeed();
+                break;
+
+            case 23:
+                cout << "Exiting program. Goodbye!" << endl;
+                break;
+
+            default:
+                cout << "Invalid choice. Please choose again." << endl;
+                break;
+        }
+    } while (choice != 23);
+
+    return 0;
+}
