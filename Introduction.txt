@@ -322,4 +322,20 @@ public:
         cout << "Custom Theme: " << customTheme << endl;
     }
 };
+class SocialMediaIntegration {
+public:
+    void shareEventDetails(const string& eventName, const string& eventDate, const string& eventLocation) {
+        cout << "Event Details shared on social media platforms:" << endl;
+        cout << "Event Name: " << eventName << endl;
+        cout << "Date: " << eventDate << endl;
+        cout << "Location: " << eventLocation << endl;
+    }
 
+    void displaySocialMediaFeed() {
+        // Placeholder for displaying social media feed
+        cout << "Social Media Feed: " << endl;
+        cout << "1. Twitter: Latest tweets about the event" << endl;
+        cout << "2. Facebook: Recent posts related to the event" << endl;
+        cout << "3. Instagram: Event photos and stories" << endl;
+    }
+};
