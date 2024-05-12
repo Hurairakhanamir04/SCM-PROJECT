@@ -203,3 +203,27 @@ public:
         cout << "Topic: " << topic << endl;
     }
 };
+class SpeakerManager {
+private:
+    vector<Speaker> speakers;
+
+public:
+    void addSpeaker(const string& name, const string& topic) {
+        speakers.push_back(Speaker(name, topic));
+        cout << "Speaker added successfully!" << endl;
+    }
+
+    void displayAllSpeakers() const {
+        if (speakers.empty()) {
+            cout << "No speakers available yet." << endl;
+            return;
+        }
+
+        cout << "Available Speakers:" << endl;
+        for (const Speaker& speaker : speakers) {
+            speaker.displaySpeakerDetails();
+            cout << endl;
+        }
+    }
+};
+
