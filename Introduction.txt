@@ -167,3 +167,26 @@ public:
     }
 };
 
+class VenueManager {
+private:
+    vector<Venue> venues;
+
+public:
+    void addVenue(const string& name, const string& location, const string& facilities) {
+        venues.push_back(Venue(name, location, facilities));
+        cout << "Venue added successfully!" << endl;
+    }
+
+    void displayAllVenues() const {
+        if (venues.empty()) {
+            cout << "No venues available yet." << endl;
+            return;
+        }
+
+        cout << "Available Venues:" << endl;
+        for (const Venue& venue : venues) {
+            venue.displayVenueDetails();
+            cout << endl;
+        }
+    }
+};
