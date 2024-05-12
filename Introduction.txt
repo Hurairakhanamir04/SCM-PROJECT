@@ -48,3 +48,21 @@ public:
         cout << "Total Price: $" << (price * quantity) << endl;
     }
 };
+class Payment {
+private:
+    string cardNumber;
+    string cardHolderName;
+    string expiryDate;
+    string cvv;
+
+public:
+    Payment(string number, string holder, string expiry, string cvv) 
+        : cardNumber(number), cardHolderName(holder), expiryDate(expiry), cvv(cvv) {}
+
+    bool processPayment(double amount) {
+        // Placeholder for payment processing logic
+        cout << "Payment processed successfully for amount $" << amount << endl;
+        return true;
+    }
+};
+
