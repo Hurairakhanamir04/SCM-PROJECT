@@ -151,4 +151,19 @@ public:
         }
     }
 };
+class Venue {
+private:
+    string name;
+    string location;
+    string facilities;
+
+public:
+    Venue(string n, string loc, string fac) : name(n), location(loc), facilities(fac) {}
+
+    void displayVenueDetails() const {
+        cout << "Venue Name: " << name << endl;
+        cout << "Location: " << location << endl;
+        cout << "Facilities: " << facilities << endl;
+    }
+};
 
