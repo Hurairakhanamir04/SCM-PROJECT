@@ -304,4 +304,22 @@ public:
         }
     }
 };
+class Customization {
+private:
+    string brandingElements;
+    string logo;
+    string customTheme;
+
+public:
+    Customization() {}
+
+    Customization(string elements, string logoPath, string theme) 
+        : brandingElements(elements), logo(logoPath), customTheme(theme) {}
+
+    void displayCustomizationDetails() const {
+        cout << "Branding Elements: " << brandingElements << endl;
+        cout << "Logo: " << logo << endl;
+        cout << "Custom Theme: " << customTheme << endl;
+    }
+};
 
