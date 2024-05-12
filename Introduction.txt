@@ -128,3 +128,27 @@ public:
         }
     }
 };
+class EventScheduler {
+private:
+    vector<Event> scheduledEvents;
+
+public:
+    void scheduleEvent(const Event& event) {
+        scheduledEvents.push_back(event);
+        cout << "Event scheduled successfully!" << endl;
+    }
+
+    void displayScheduledEvents() const {
+        if (scheduledEvents.empty()) {
+            cout << "No events scheduled yet." << endl;
+            return;
+        }
+
+        cout << "Scheduled Events:" << endl;
+        for (const Event& event : scheduledEvents) {
+            event.display();
+            cout << endl;
+        }
+    }
+};
+
