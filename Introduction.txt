@@ -269,4 +269,39 @@ public:
         }
     }
 };
+class Networking {
+private:
+    map<string, string> attendees; // Username -> Name
+    map<string, vector<string>> connections; // Username -> Connections
+
+public:
+    void addAttendee(const string& username, const string& name) {
+        attendees[username] = name;
+    }
+
+    void connectAttendees(const string& username1, const string& username2) {
+        connections[username1].push_back(username2);
+        connections[username2].push_back(username1);
+        cout << attendees[username1] << " and " << attendees[username2] << " are now connected." << endl;
+    }
+
+    void displayAttendeeConnections(const string& username) const {
+        auto it = connections.find(username);
+        if (it != connections.end()) {
+            cout << "Connections for " << attendees.at(username) << ":" << endl;
+            for (const string& connection : it->second) {
+                cout << " - " << attendees.at(connection) << endl;
+            }
+        } else {
+            cout << "No connections found for " << attendees.at(username) << endl;
+        }
+    }
+
+    void displayAllAttendees() const {
+        cout << "Attendees:" << endl;
+        for (const auto& attendee : attendees) {
+            cout << "Username: " << attendee.first << ", Name: " << attendee.second << endl;
+        }
+    }
+};
 
