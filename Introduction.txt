@@ -26,3 +26,25 @@ public:
         cout << "Location: " << location << endl;
     }
 };
+class Ticket {
+private:
+    string eventName;
+    string eventDate;
+    string eventLocation;
+    string ticketType;
+    int quantity;
+    double price;
+
+public:
+    Ticket(string name, string date, string location, string type, int qty, double p) 
+        : eventName(name), eventDate(date), eventLocation(location), ticketType(type), quantity(qty), price(p) {}
+
+    void displayTicketDetails() const {
+        cout << "Event Name: " << eventName << endl;
+        cout << "Date: " << eventDate << endl;
+        cout << "Location: " << eventLocation << endl;
+        cout << "Ticket Type: " << ticketType << endl;
+        cout << "Quantity: " << quantity << endl;
+        cout << "Total Price: $" << (price * quantity) << endl;
+    }
+};
