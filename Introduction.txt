@@ -3,3 +3,26 @@ Huraira Khan
 Muhammad Kaleem 
  
 Online Event Management App
+
+#include <iostream>
+#include <map>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+class Event {
+private:
+    string name;
+    string date;
+    string location;
+
+public:
+    Event(string n, string d, string l) : name(n), date(d), location(l) {}
+
+    void display() const {
+        cout << "Event: " << name << endl;
+        cout << "Date: " << date << endl;
+        cout << "Location: " << location << endl;
+    }
+};
