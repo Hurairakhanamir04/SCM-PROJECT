@@ -190,3 +190,16 @@ public:
         }
     }
 };
+class Speaker {
+private:
+    string name;
+    string topic;
+
+public:
+    Speaker(string n, string t) : name(n), topic(t) {}
+
+    void displaySpeakerDetails() const {
+        cout << "Speaker Name: " << name << endl;
+        cout << "Topic: " << topic << endl;
+    }
+};
